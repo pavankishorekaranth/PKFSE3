@@ -1,14 +1,20 @@
+using Buyer.API.Data;
+using Buyer.API.Repositaries;
+using Buyer.API.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Seller.API.Data;
-using Seller.API.Repositaries;
-using Seller.API.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Seller.API
+namespace Buyer.API
 {
     public class Startup
     {
@@ -24,13 +30,13 @@ namespace Seller.API
         {
 
             services.AddControllers();
-            services.AddScoped<SellerContext>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<BuyerContext>();
+            services.AddScoped<IBidRepository, BidRepository>();
+            services.AddScoped<IBidService, BidService>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Seller.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Buyer.API", Version = "v1" });
             });
         }
 
@@ -41,7 +47,7 @@ namespace Seller.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Seller.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Buyer.API v1"));
             }
 
             app.UseRouting();

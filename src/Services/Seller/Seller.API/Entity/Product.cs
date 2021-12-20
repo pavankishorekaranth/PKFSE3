@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using e_auction.Seller.Models;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,9 @@ namespace Seller.API.Entity
         public string ProductName { get; set; }
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
-        public int StartingPrice { get; set; }
+        public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
+        public User UserDetails { get; set; }
+        
     }
 }

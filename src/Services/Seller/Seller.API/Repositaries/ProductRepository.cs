@@ -1,9 +1,6 @@
 ﻿using MongoDB.Driver;
 using Seller.API.Data;
 using Seller.API.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Seller.API.Repositaries
@@ -15,6 +12,11 @@ namespace Seller.API.Repositaries
         public ProductRepository(ISellerContext context)
         {
             _context = context;
+        }
+
+        public async Task<Product> GetProductById(string productId)
+        {
+            return await _context.Products.Find(p => p.ProductId == productId).FirstOrDefaultAsync();
         }
 
         public async Task CreateProduct(Product product)
