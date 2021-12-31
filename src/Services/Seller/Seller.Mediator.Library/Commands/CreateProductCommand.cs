@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Seller.API.Features.Commands.CreateProduct
+namespace Seller.Mediator.Library.Commands
 {
     public class CreateProductCommand : IRequest<int>
     {

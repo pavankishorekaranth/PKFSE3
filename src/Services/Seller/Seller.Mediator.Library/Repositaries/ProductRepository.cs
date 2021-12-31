@@ -1,11 +1,15 @@
 ﻿using MongoDB.Driver;
-using Seller.API.Data;
-using Seller.API.Entity;
+using Seller.Mediator.Library.DataAccess;
+using Seller.Mediator.Library.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Seller.API.Repositaries
+namespace Seller.Mediator.Library.Repositaries
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository
     {
         private readonly ISellerContext _context;
 

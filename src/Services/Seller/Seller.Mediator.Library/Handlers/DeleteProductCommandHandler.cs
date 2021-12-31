@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Seller.API.Exceptions;
-using Seller.API.Repositaries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Seller.API.Features.Commands.DeleteProduct;
+using Seller.Mediator.Library.Exceptions;
+using Seller.Mediator.Library.Repositaries;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Seller.API.Features.Commands.DeleteProduct
+namespace Seller.Mediator.Library.Handlers
 {
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
     {

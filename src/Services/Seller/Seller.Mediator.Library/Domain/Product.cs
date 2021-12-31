@@ -1,10 +1,8 @@
-﻿using e_auction.Seller.Models;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace Seller.API.Entity
+namespace Seller.Mediator.Library.Domain
 {
     public class Product
     {
@@ -12,8 +10,8 @@ namespace Seller.API.Entity
         [BsonRepresentation(BsonType.ObjectId)]
         public string ProductId { get; set; }
 
-       // [Required]
-       // [StringLength(30, MinimumLength = 5, ErrorMessage = "Minimum should be 5 characters and max should be 30")]
+        // [Required]
+        // [StringLength(30, MinimumLength = 5, ErrorMessage = "Minimum should be 5 characters and max should be 30")]
         public string ProductName { get; set; }
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
@@ -23,7 +21,7 @@ namespace Seller.API.Entity
         public string FirstName { get; set; }
 
         //[Required]
-       // [StringLength(25, MinimumLength = 3, ErrorMessage = "Minimum should be 3 characters and max should be 25")]
+        // [StringLength(25, MinimumLength = 3, ErrorMessage = "Minimum should be 3 characters and max should be 25")]
         public string LastName { get; set; }
 
         public string Address { get; set; }
@@ -37,7 +35,7 @@ namespace Seller.API.Entity
         public string Phone { get; set; }
 
         //[Required]
-       // [EmailAddress(ErrorMessage = "Email is invalid")]
+        // [EmailAddress(ErrorMessage = "Email is invalid")]
         public string Email { get; set; }
     }
 }

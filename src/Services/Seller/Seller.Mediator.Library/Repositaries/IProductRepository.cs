@@ -1,10 +1,10 @@
-﻿using Seller.API.Entity;
+﻿using Seller.Mediator.Library.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Seller.API.Repositaries
+namespace Seller.Mediator.Library.Repositaries
 {
     public interface IProductRepository
     {

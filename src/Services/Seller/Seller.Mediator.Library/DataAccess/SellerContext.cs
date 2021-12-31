@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using Seller.API.Entity;
+using Seller.Mediator.Library.Domain;
 
-namespace Seller.API.Data
+namespace Seller.Mediator.Library.DataAccess
 {
     public class SellerContext : ISellerContext
     {
