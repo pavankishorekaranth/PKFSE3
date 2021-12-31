@@ -1,15 +1,14 @@
 ﻿using Seller.Mediator.Library.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Seller.Mediator.Library.Repositaries
 {
     public interface IProductRepository
     {
+        Task<List<Product>> GetProducts();
         Task<Product> GetProductById(string productId);
-        Task CreateProduct(Product product);
+        Task<Product> CreateProduct(Product product);
         Task DeleteProduct(string productId);
     }
 }

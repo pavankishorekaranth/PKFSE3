@@ -3,7 +3,7 @@ using System;
 
 namespace Seller.Mediator.Library.Commands
 {
-    public class CreateProductCommand : IRequest<int>
+    public class CreateProductCommand : IRequest<string>
     {
         public string ProductId { get; set; }
         public string ProductName { get; set; }

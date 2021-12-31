@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Seller.Mediator.Library.Repositaries
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly ISellerContext _context;
 
@@ -18,14 +18,20 @@ namespace Seller.Mediator.Library.Repositaries
             _context = context;
         }
 
+        public async Task<List<Product>> GetProducts()
+        {
+            return await _context.Products.Find(p => true).ToListAsync();
+        }
+
         public async Task<Product> GetProductById(string productId)
         {
             return await _context.Products.Find(p => p.ProductId == productId).FirstOrDefaultAsync();
         }
 
-        public async Task CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
             await _context.Products.InsertOneAsync(product);
+            return product;
         }
 
         public async Task DeleteProduct(string productId)

@@ -3,6 +3,8 @@ using System;
 using System.Reflection;
 using MediatR;
 using FluentValidation;
+using Seller.Mediator.Library.DataAccess;
+using Seller.Mediator.Library.Repositaries;
 
 namespace Seller.Mediator.Library
 {
@@ -13,6 +15,8 @@ namespace Seller.Mediator.Library
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped<ISellerContext,SellerContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;
         }

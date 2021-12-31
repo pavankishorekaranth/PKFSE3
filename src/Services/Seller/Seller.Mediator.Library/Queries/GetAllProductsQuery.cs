@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Seller.Mediator.Library.Queries
 {
-    public class GetAllProductsQuery : IRequest<ProductDetails>
+    public class GetAllProductsQuery : IRequest<List<ProductDetails>>
     {
+
     }
 }
