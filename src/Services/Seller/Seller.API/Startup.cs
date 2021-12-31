@@ -7,6 +7,9 @@ using Microsoft.OpenApi.Models;
 using Seller.API.Data;
 using Seller.API.Repositaries;
 using Seller.API.Service;
+using System.Reflection;
+using MediatR;
+
 
 namespace Seller.API
 {
@@ -26,12 +29,15 @@ namespace Seller.API
             services.AddControllers();
             services.AddScoped<SellerContext>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductService, ProductService>();
+           // services.AddScoped<IProductService, ProductService>();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Seller.API", Version = "v1" });
             });
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

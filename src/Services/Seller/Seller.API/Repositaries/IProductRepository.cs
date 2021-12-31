@@ -10,6 +10,6 @@ namespace Seller.API.Repositaries
     {
         Task<Product> GetProductById(string productId);
         Task CreateProduct(Product product);
-        Task<bool> DeleteProduct(string productId);
+        Task DeleteProduct(string productId);
     }
 }

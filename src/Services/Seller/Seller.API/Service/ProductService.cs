@@ -25,7 +25,7 @@ namespace Seller.API.Service
             await productRepository.CreateProduct(product);
         }
 
-        public async Task<bool> DeleteProduct(string productId)
+        public async Task DeleteProduct(string productId)
         {
             var product = await productRepository.GetProductById(productId);
             if (product == null)
@@ -34,7 +34,7 @@ namespace Seller.API.Service
             if (product.BidEndDate < DateTime.Now)
                 throw new DeleteProductAfterBidEndDate($"Product cannot be deleted after Bind End Date");
 
-            return await productRepository.DeleteProduct(productId);
+            await productRepository.DeleteProduct(productId);
         }
 
         public async Task<Product> GetProductById(string productId)

@@ -7,5 +7,6 @@ namespace Buyer.API.Repositaries
     {
         Task PlaceBid(Bid bid);
         Task<bool> UpdateBid(string productId, string buyerEmail, decimal newAmount);
+        Task<bool> IsBidByProductIdAndEmailExists(string productId, string email);
     }
 }

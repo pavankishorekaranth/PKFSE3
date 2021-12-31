@@ -21,6 +21,10 @@ namespace Seller.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureLogging((hostContext, logging)=>
+                {
+                    hostContext.Configuration.GetSection("Logging");
                 });
     }
 }

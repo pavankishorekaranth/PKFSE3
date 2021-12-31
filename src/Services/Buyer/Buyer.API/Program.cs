@@ -18,9 +18,14 @@ namespace Buyer.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+               webBuilder.UseStartup<Startup>();
+            })
+            .ConfigureLogging((hostContext, logging) =>
+            {
+                // Configuring Logging Information
+                logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
+            });
     }
 }

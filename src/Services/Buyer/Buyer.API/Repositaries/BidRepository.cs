@@ -31,5 +31,10 @@ namespace Buyer.API.Repositaries
 
             return updatedResult.IsAcknowledged && updatedResult.ModifiedCount > 0;
         }
+
+        public async Task<bool> IsBidByProductIdAndEmailExists(string productId, string email)
+        {
+            return await _context.Bids.Find(p => p.ProductId == productId && p.Email == email).CountDocumentsAsync() >=1;
+        }
     }
 }

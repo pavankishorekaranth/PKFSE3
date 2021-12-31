@@ -24,13 +24,10 @@ namespace Seller.API.Repositaries
             await _context.Products.InsertOneAsync(product);
         }
 
-        public async Task<bool> DeleteProduct(string productId)
+        public async Task DeleteProduct(string productId)
         {
             FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.ProductId, productId);
-            DeleteResult deletedResult = await _context.Products.DeleteOneAsync(filter);
-
-            return deletedResult.IsAcknowledged && deletedResult.DeletedCount > 0;
-        
+            await _context.Products.DeleteOneAsync(filter);
         }
     }
 }

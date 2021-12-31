@@ -68,12 +68,13 @@ namespace Seller.API.Controllers
         }
 
         [HttpDelete("delete/{productId}")]
-        public async Task<ActionResult<bool>> DeleteProduct(string productId)
+        public async Task<ActionResult> DeleteProduct(string productId)
         {
             try
             {
                 _logger.LogInformation($"Deleting the product {productId}");
-                return Ok(await productService.DeleteProduct(productId));
+                await productService.DeleteProduct(productId);
+                return Ok();
             }
             catch(Exception ex)
             {
