@@ -10,5 +10,6 @@ namespace Seller.API.Data
     public interface ISellerContext
     {
         IMongoCollection<Product> Products { get; }
+        IMongoCollection<Bid> Bids { get;}
     }
 }

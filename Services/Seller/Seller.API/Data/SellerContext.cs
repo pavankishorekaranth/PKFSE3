@@ -12,8 +12,10 @@ namespace Seller.API.Data
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 
             Products = database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
+            Bids = database.GetCollection<Bid>(configuration.GetValue<string>("Bid"));
         }
 
         public IMongoCollection<Product> Products { get; }
+        public IMongoCollection<Bid> Bids { get; }
     }
 }
