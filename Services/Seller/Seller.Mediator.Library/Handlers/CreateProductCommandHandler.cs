@@ -40,9 +40,9 @@ namespace Seller.Mediator.Library.Handlers
             var productEntity = _mapper.Map<Product>(request);
             var newOrder = await productRepository.CreateProduct(productEntity);
 
-            _logger.LogInformation($"Order {newOrder.ProductId} is successfully created.");
+            _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
 
-            return newOrder.ProductId;
+            return newOrder.Id;
         }
     }
 }

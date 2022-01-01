@@ -5,6 +5,7 @@ using MediatR;
 using FluentValidation;
 using Seller.Mediator.Library.DataAccess;
 using Seller.Mediator.Library.Repositaries;
+using Seller.Mediator.Library.Behaviour;
 
 namespace Seller.Mediator.Library
 {
@@ -17,6 +18,8 @@ namespace Seller.Mediator.Library
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<ISellerContext,SellerContext>();
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             return services;
         }

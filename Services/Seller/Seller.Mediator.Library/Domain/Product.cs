@@ -8,7 +8,7 @@ namespace Seller.Mediator.Library.Domain
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string ProductId { get; set; }
+        public string Id { get; set; }
 
         // [Required]
         // [StringLength(30, MinimumLength = 5, ErrorMessage = "Minimum should be 5 characters and max should be 30")]

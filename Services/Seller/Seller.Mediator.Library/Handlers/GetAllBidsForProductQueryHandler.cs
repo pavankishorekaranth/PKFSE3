@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MongoDB.Driver.Linq;
+using Seller.Mediator.Library.Domain;
 
 namespace Seller.Mediator.Library.Handlers
 {
@@ -42,29 +44,20 @@ namespace Seller.Mediator.Library.Handlers
                 throw new ProductNotExist($"Product with {request.ProductId} doesnot exists");
             }
 
-            var result = (from a in _context.Products.AsQueryable()
-                         join b in _context.Bids.AsQueryable() on a.ProductId equals b.ProductId into bids
-                         where a.ProductId == productId
-                         select new ProductBidDetails
-                         {
-                             ProductId = a.ProductId,
-                             ProductName = a.ProductName,
-                             ShortDescription = a.ShortDescription,
-                             DetailedDescription = a.DetailedDescription,
-                             StartingPrice = a.StartingPrice,
-                             BidEndDate = a.BidEndDate,
-                             FirstName = a.FirstName,
-                             LastName = a.LastName,
-                             Address = a.Address,
-                             City = a.City,
-                             State = a.State,
-                             Pin = a.Pin,
-                             Phone = a.Phone,
-                             Email = a.Email,
-                             Bids = (bids!=null)? _mapper.Map<List<BidDetails>>(bids.OrderByDescending(x=>x.BidAmount).ToList()) : null
-                         }).FirstOrDefault();
+            List<Bid> bids = await _context.Products.AsQueryable()
+                                    .Where(j => j.Id == request.ProductId)
+                                    .Join(
+                                       _context.Bids, //foreign collection
+                                        j => j.Id, //local ID
+                                        b => b.ProductId, //foreign ID
+                                        (j, b) => b) //result selector expression
+                                    .ToListAsync();
 
-            return result;
+            var productDetails = _mapper.Map<ProductBidDetails>(product);
+            productDetails.Bids = _mapper.Map<List<BidDetails>>(bids);
+           
+
+            return productDetails;
         }
     }
 }

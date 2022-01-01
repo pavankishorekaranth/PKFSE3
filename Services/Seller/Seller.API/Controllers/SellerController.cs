@@ -39,7 +39,7 @@ namespace Seller.API.Controllers
             catch (ProductNotExist ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(500);
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -61,12 +61,18 @@ namespace Seller.API.Controllers
             catch (BidEndDateException ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(400);
+                return BadRequest(ex.Message);
             }
             catch (MustBeNumberException ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(400);
+                return BadRequest(ex.Message);
+            }
+            catch(ValidationException ex)
+            {
+                _logger.LogError(ex.Message);
+                var items = ex.Errors.SelectMany(d => d.Value).ToList();
+                return BadRequest(string.Join(";", items));
             }
             catch (Exception ex)
             {
@@ -89,17 +95,17 @@ namespace Seller.API.Controllers
             catch(ProductNotExist ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(500);
+                return BadRequest(ex.Message);
             }
             catch (DeleteProductAfterBidEndDate ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(500);
+                return BadRequest(ex.Message);
             }
             catch (DeleteProductForAtleastOneBidException ex)
             {
                 _logger.LogError(ex.Message);
-                return StatusCode(500);
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

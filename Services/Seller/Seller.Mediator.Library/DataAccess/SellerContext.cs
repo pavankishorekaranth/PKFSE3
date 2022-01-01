@@ -11,8 +11,8 @@ namespace Seller.Mediator.Library.DataAccess
             var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 
-            Products = database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
-            Bids = database.GetCollection<Bid>(configuration.GetValue<string>("Bid"));
+            Products = database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:ProductCollectionName"));
+            Bids = database.GetCollection<Bid>(configuration.GetValue<string>("DatabaseSettings:BidCollectionName"));
         }
 
         public IMongoCollection<Product> Products { get; }

@@ -12,6 +12,7 @@ namespace Seller.Mediator.Library.Mapper
             CreateMap<Product, ProductDetails>().ReverseMap();
             CreateMap<Product,CreateProductCommand>().ReverseMap();
             CreateMap<Bid, BidDetails>().ReverseMap();
+            CreateMap<Product, ProductBidDetails>().ReverseMap();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Seller.Mediator.Library.Handlers
                 throw new BidEndDateException("Product cannot be deleted after Bid end date");
             }
 
-            var count = await _context.Bids.Find(x=> x.ProductId== productToDelete.ProductId).CountDocumentsAsync();
+            var count = await _context.Bids.Find(x=> x.ProductId== productToDelete.Id).CountDocumentsAsync();
 
             if (count > 0)
             {
@@ -48,7 +48,7 @@ namespace Seller.Mediator.Library.Handlers
 
             await _productRepository.DeleteProduct(request.ProductId);
 
-            _logger.LogInformation($"Order {productToDelete.ProductId} is successfully deleted.");
+            _logger.LogInformation($"Order {productToDelete.Id} is successfully deleted.");
 
             return Unit.Value;
         }

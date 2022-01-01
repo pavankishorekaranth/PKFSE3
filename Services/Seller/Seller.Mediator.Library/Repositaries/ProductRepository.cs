@@ -25,7 +25,7 @@ namespace Seller.Mediator.Library.Repositaries
 
         public async Task<Product> GetProductById(string productId)
         {
-            return await _context.Products.Find(p => p.ProductId == productId).FirstOrDefaultAsync();
+            return await _context.Products.Find(p => p.Id == productId).FirstOrDefaultAsync();
         }
 
         public async Task<Product> CreateProduct(Product product)
@@ -36,7 +36,7 @@ namespace Seller.Mediator.Library.Repositaries
 
         public async Task DeleteProduct(string productId)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.ProductId, productId);
+            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
             await _context.Products.DeleteOneAsync(filter);
         }
     }
