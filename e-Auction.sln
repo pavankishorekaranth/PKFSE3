@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Buyer", "Buyer", "{90D17985
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buyer.API", "Services\Buyer\Buyer.API\Buyer.API.csproj", "{ED065D75-4B8C-47E8-B3F1-3884C788EE74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seller.Mediator.Library", "src\Services\Seller\Seller.Mediator.Library\Seller.Mediator.Library.csproj", "{3B79880A-3C99-4FF2-8F76-DF847A4A470B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seller.Mediator.Library", "Services\Seller\Seller.Mediator.Library\Seller.Mediator.Library.csproj", "{3B79880A-3C99-4FF2-8F76-DF847A4A470B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
