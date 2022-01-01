@@ -11,5 +11,10 @@ namespace Seller.Mediator.Library.Queries
     public class GetAllBidsForProductQuery : IRequest<ProductBidDetails>
     {
         public string ProductId { get; set; }
+
+        public GetAllBidsForProductQuery(string productId)
+        {
+            ProductId = productId;
+        }
     }
 }

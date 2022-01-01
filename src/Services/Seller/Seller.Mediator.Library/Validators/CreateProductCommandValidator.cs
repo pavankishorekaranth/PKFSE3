@@ -34,13 +34,16 @@ namespace Seller.Mediator.Library.Validators
                .NotEmpty().WithMessage("{Email} is required.")
                .NotNull().WithMessage("{Email} should not be null.")
                .EmailAddress().WithMessage("Valid email address is required");
+
         }
+
         
+
     }
 
     public static class Extensions
     {
         public static IRuleBuilderOptions<T, string> MatchPhoneNumber<T>(this IRuleBuilder<T, string> rule)
-       => rule.Matches(@"((\+*)((0[ -]*)*|((91 )*))((\d{12})+|(\d{10})+))|\d{5}([- ]*)\d{6}").WithMessage("Invalid phone number");
+          => rule.Matches(@"((\+*)((0[ -]*)*|((91 )*))((\d{12})+|(\d{10})+))|\d{5}([- ]*)\d{6}").WithMessage("Invalid phone number");
     }
 }
