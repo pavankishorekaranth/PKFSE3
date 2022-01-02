@@ -7,6 +7,7 @@ using Seller.Mediator.Library.Exceptions;
 using Seller.Mediator.Library.Queries;
 using Seller.Mediator.Library.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +26,25 @@ namespace Seller.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{productId}", Name = "GetProduct")]
+        [HttpGet("GetAllProducts", Name = "GetAllProducts")]
+        public async Task<ActionResult<List<ProductDetails>>> Get()
+        {
+            try
+            {
+                _logger.LogInformation($"Getting all product details");
+                var query = new GetAllProductsQuery();
+                var productsList = await _mediator.Send(query);
+
+                return Ok(productsList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet("ShowBids/{productId}", Name = "ShowBids")]
         public async Task<ActionResult<ProductBidDetails>> Get(string productId)
         {
             try

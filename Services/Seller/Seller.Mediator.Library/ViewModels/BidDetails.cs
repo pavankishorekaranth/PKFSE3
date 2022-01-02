@@ -8,6 +8,7 @@ namespace Seller.Mediator.Library.ViewModels
 {
     public class BidDetails
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }

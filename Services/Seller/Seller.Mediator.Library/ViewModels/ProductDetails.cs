@@ -8,7 +8,7 @@ namespace Seller.Mediator.Library.ViewModels
 {
     public class ProductDetails
     {
-        public string ProductId { get; set; }
+        public string Id { get; set; }
         public string ProductName { get; set; }
     }
 }

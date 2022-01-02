@@ -4,17 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Seller.Mediator.Library.ViewModels
+namespace EventBus.Message.Events
 {
-    public class ProductBidDetails
+    public class CreateBidEvent
     {
         public string Id { get; set; }
-        public string ProductName { get; set; }
-        public string ShortDescription { get; set; }
-        public string DetailedDescription { get; set; }
-        public string Category { get; set; }
-        public decimal StartingPrice { get; set; }
-        public DateTime BidEndDate { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -23,6 +17,7 @@ namespace Seller.Mediator.Library.ViewModels
         public int Pin { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<BidDetails> Bids { get; set; }
+        public decimal BidAmount { get; set; }
+        public string ProductId { get; set; }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using FluentValidation;
 using Seller.Mediator.Library.Commands;
+using System.Collections.Generic;
+using System.Linq;
+using LibraryConstant = Seller.Mediator.Library.Constants.Constants;
 
 namespace Seller.Mediator.Library.Validators
 {
@@ -35,7 +38,18 @@ namespace Seller.Mediator.Library.Validators
                .NotNull().WithMessage("Email should not be null.")
                .MatchEmail();
 
+            RuleFor(p => p.Category)
+               .NotEmpty().WithMessage("Category is required.")
+               .NotNull().WithMessage("Category should not be null.")
+               .Must(ValidCategory).WithMessage("Category must be one among the following: Painting/Sculptor/Ornament and case sensitive");
         }
+
+        private bool ValidCategory(string category)
+        {
+            List<string> categoryList = LibraryConstant.CategoryList;
+            return categoryList.Any(c=> c.Equals(category));
+        }
+
     }
 
     public static class Extensions

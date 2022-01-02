@@ -32,7 +32,7 @@ namespace Seller.Mediator.Library.Handlers
                 throw new MustBeNumberException("Must be a postive number");
             }
 
-            if(DateTime.Now > request.BidEndDate)
+            if(DateTime.UtcNow > request.BidEndDate)
             {
                 throw new BidEndDateException("Bid End Date must be future date");
             }

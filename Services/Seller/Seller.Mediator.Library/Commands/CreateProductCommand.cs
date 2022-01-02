@@ -5,10 +5,11 @@ namespace Seller.Mediator.Library.Commands
 {
     public class CreateProductCommand : IRequest<string>
     {
-        public string ProductId { get; set; }
+        public string Id { get; set; }
         public string ProductName { get; set; }
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
+        public string Category { get; set; }
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
         public string FirstName { get; set; }

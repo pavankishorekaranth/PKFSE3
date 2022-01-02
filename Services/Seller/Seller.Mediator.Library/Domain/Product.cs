@@ -15,6 +15,7 @@ namespace Seller.Mediator.Library.Domain
         public string ProductName { get; set; }
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
+        public string Category { get; set; }
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
         //public User UserDetails { get; set; }
