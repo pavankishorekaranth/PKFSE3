@@ -13,4 +13,8 @@
     <Folder Include="Exceptions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CommonUtility\EventBus.Message\EventBus.Message.csproj" />
+  </ItemGroup>
+
 </Project>

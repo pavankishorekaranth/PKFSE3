@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CommonUtility\EventBus.Message\EventBus.Message.csproj" />
     <ProjectReference Include="..\Seller.Mediator.Library\Seller.Mediator.Library.csproj" />
   </ItemGroup>
 
