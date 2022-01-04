@@ -10,6 +10,6 @@ namespace Buyer.API.Service
     {
         Task PlaceBid(Bid bid);
         Task<bool> UpdateBid(string productId, string buyerEmail, decimal newAmount);
-        Task<bool> IsBidByProductIdAndEmailExists(string productId, string email);
+        Task<bool> IsBidForProductAlreadyExists(string productId, string email);
     }
 }

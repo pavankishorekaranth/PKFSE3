@@ -1,9 +1,13 @@
+using EventBus.Message.Common;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
+using Seller.API.EventBusConsumer;
 using Seller.Mediator.Library;
 
 namespace Seller.API
@@ -21,7 +25,25 @@ namespace Seller.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices();
-            services.AddControllers();
+            //services.AddControllers().AddJsonOptions(opt => {
+            //    opt.JsonSerializerOptions. = new DefaultContractResolver();
+            //});
+
+            //RabbitMq configurations
+            services.AddMassTransit(config =>
+            {
+                config.AddConsumer<CreateBidConsumer>();
+
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+
+                    cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c => {
+                        c.ConfigureConsumer<CreateBidConsumer>(ctx);
+                    });
+                });
+            });
+            services.AddMassTransitHostedService();
 
             services.AddSwaggerGen(c =>
             {

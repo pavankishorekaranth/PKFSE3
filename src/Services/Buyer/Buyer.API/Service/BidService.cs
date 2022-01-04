@@ -1,4 +1,5 @@
-﻿using Buyer.API.Entity;
+﻿using Buyer.API.Data;
+using Buyer.API.Entity;
 using Buyer.API.Exceptions;
 using Buyer.API.Repositaries;
 using System;
@@ -10,29 +11,31 @@ namespace Buyer.API.Service
 {
     public class BidService : IBidService
     {
-        private readonly IBidRepository bidRepository;
+        private readonly IBidRepository _bidRepository;
+        private readonly IBuyerContext _buyerContext;
 
-        public BidService(IBidRepository bidRepository)
+        public BidService(IBidRepository bidRepository, IBuyerContext buyerContext)
         {
-            this.bidRepository = bidRepository;
+            _bidRepository = bidRepository;
+            _buyerContext = buyerContext;
         }
 
-        public async Task<bool> IsBidByProductIdAndEmailExists(string productId, string email)
+        public async Task<bool> IsBidForProductAlreadyExists(string productId, string email)
         {
-            return await bidRepository.IsBidByProductIdAndEmailExists(productId,email);
+            return await _bidRepository.IsBidForProductAlreadyExists(productId,email);
         }
 
         public async Task PlaceBid(Bid bid)
         {
-            if (await IsBidByProductIdAndEmailExists(bid.ProductId, bid.Email))
+            if (await IsBidForProductAlreadyExists(bid.ProductId, bid.Email))
                 throw new BidAlreadyPlacedByUserException($"The bid already has been placed by {bid.Email} for productId {bid.ProductId}");
            
-            await bidRepository.PlaceBid(bid);
+            await _bidRepository.PlaceBid(bid);
         }
 
         public async Task<bool> UpdateBid(string productId, string buyerEmail, decimal newAmount)
         {
-            return await bidRepository.UpdateBid(productId, buyerEmail, newAmount);
+            return await _bidRepository.UpdateBid(productId, buyerEmail, newAmount);
         }
     }
 }

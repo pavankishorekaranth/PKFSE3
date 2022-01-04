@@ -18,6 +18,7 @@ namespace Seller.Mediator.Library
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<ISellerContext,SellerContext>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBidRepository, BidRepository>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 

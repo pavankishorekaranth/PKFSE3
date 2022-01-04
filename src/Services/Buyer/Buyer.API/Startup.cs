@@ -1,6 +1,7 @@
 using Buyer.API.Data;
 using Buyer.API.Repositaries;
 using Buyer.API.Service;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +31,22 @@ namespace Buyer.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
-            services.AddScoped<BuyerContext>();
+            services.AddControllers().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
+
+            services.AddScoped<IBuyerContext, BuyerContext>();
             services.AddScoped<IBidRepository, BidRepository>();
             services.AddScoped<IBidService, BidService>();
+
+            services.AddMassTransit(config=> {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["EventBusSettings.HostAddress"]);
+                });
+            });
+            services.AddMassTransitHostedService();
+
 
             services.AddSwaggerGen(c =>
             {

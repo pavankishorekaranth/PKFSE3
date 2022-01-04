@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.3.0" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.13" />
     <PackageReference Include="MongoDB.Driver" Version="2.14.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
@@ -15,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\CommonUtility\EventBus.Message\EventBus.Message.csproj" />
+    <ProjectReference Include="..\Buyer.Mediator.Library\Buyer.Mediator.Library.csproj" />
   </ItemGroup>
 
 </Project>
