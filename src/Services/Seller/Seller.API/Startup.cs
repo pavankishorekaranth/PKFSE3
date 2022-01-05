@@ -8,7 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Seller.API.EventBusConsumer;
-using Seller.Mediator.Library;
+using Seller.Infrastructure;
+using Seller.Application;
 
 namespace Seller.API
 {
@@ -25,9 +26,11 @@ namespace Seller.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices();
-            //services.AddControllers().AddJsonOptions(opt => {
-            //    opt.JsonSerializerOptions. = new DefaultContractResolver();
-            //});
+            services.AddInfrastructureService(Configuration);
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
 
             //RabbitMq configurations
             services.AddMassTransit(config =>
@@ -49,7 +52,7 @@ namespace Seller.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Seller.API", Version = "v1" });
             });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,12 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\CommonUtility\EventBus.Message\EventBus.Message.csproj" />
-    <ProjectReference Include="..\Buyer.Mediator.Library\Buyer.Mediator.Library.csproj" />
+    <ProjectReference Include="..\Buyer.Application\Buyer.Application.csproj" />
+    <ProjectReference Include="..\Buyer.Infrastructure\Buyer.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

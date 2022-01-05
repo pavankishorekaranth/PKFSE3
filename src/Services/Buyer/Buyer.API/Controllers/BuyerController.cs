@@ -1,7 +1,5 @@
-﻿using Buyer.API.Entity;
-using Buyer.API.Service;
-using Buyer.Mediator.Library.Commands;
-using Buyer.Mediator.Library.Exceptions;
+﻿using Buyer.Application.Commands;
+using Buyer.Application.Exceptions;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

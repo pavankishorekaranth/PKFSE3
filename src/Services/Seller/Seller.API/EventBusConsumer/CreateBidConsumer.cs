@@ -3,7 +3,7 @@ using EventBus.Message.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Seller.Mediator.Library.Commands;
+using Seller.Application.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,5 @@
-using Buyer.API.Data;
-using Buyer.API.Repositaries;
-using Buyer.API.Service;
+using Buyer.Infrastructure;
+using Buyer.Application;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,14 +29,12 @@ namespace Buyer.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddInfrastructureService();
+            services.AddApplicationService();
 
             services.AddControllers().AddNewtonsoftJson(opt => {
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
-
-            services.AddScoped<IBuyerContext, BuyerContext>();
-            services.AddScoped<IBidRepository, BidRepository>();
-            services.AddScoped<IBidService, BidService>();
 
             services.AddMassTransit(config=> {
                 config.UsingRabbitMq((ctx, cfg) =>

@@ -1,11 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Seller.API.Features.Commands.DeleteProduct;
-using Seller.Mediator.Library.Commands;
-using Seller.Mediator.Library.Exceptions;
-using Seller.Mediator.Library.Queries;
-using Seller.Mediator.Library.ViewModels;
+using Seller.Application.Commands;
+using Seller.Application.Exceptions;
+using Seller.Application.Queries;
+using Seller.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
