@@ -1,5 +1,6 @@
 ﻿using Buyer.Application.Commands;
 using Buyer.Application.Exceptions;
+using EventBus.Message.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +34,16 @@ namespace Buyer.API.Controllers
                 _logger.LogInformation("Creating Bid");
                 var result = await _mediator.Send(bid);
 
-                //Need to publish here for rabbitmq
+                //Publish here to rabbitmq/ Azure Service Bus
+                await _publishEndpoint.Publish<CreateBidEvent>(result);
 
-                _logger.LogInformation($"Bid is created with Id {result}");
-                return Ok(result);
+                _logger.LogInformation($"Bid is created with Id {result.Id}");
+                return Ok();
+            }
+            catch(BidAlreadyPlacedByUserException ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest();
             }
             catch (ValidationException ex)
             {

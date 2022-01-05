@@ -9,12 +9,6 @@ namespace Buyer.Application.Validators
     {
         public CreateBidCommandValidator()
         {
-            //RuleFor(p => p.ProductName)
-            //    .NotEmpty().WithMessage("ProductName is required")
-            //    .NotNull().WithMessage("ProductName should not be null")
-            //    .MaximumLength(30).WithMessage("ProductName must not exceed 30 characters.")
-            //    .MinimumLength(5).WithMessage("ProductName must be above 5 characters");
-
             RuleFor(p => p.FirstName)
                .NotEmpty().WithMessage("FirstName is required")
                .NotNull().WithMessage("FirstName should not be null")
@@ -30,6 +24,8 @@ namespace Buyer.Application.Validators
             RuleFor(p => p.Phone)
                 .NotEmpty().WithMessage("Phone Number is required")
                 .NotNull().WithMessage("Phone Number cannot be null")
+                .MinimumLength(10).WithMessage("Minimum of 10 characters are required")
+                .MaximumLength(10).WithMessage("Maximum of 10 characters are required")
                 .MatchPhoneNumber();
 
             RuleFor(p => p.Email)
@@ -37,6 +33,9 @@ namespace Buyer.Application.Validators
                .NotNull().WithMessage("Email should not be null.")
                .MatchEmail();
 
+            RuleFor(p => p.ProductId)
+               .NotEmpty().WithMessage("ProductId is required.")
+               .NotNull().WithMessage("ProductId should not be null.");
         }
 
     }

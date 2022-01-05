@@ -1,14 +1,12 @@
-﻿using Buyer.Application.ViewModel;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buyer.Application.Commands
+namespace Buyer.Application.ViewModel
 {
-    public class CreateBidCommand : IRequest<BidInfo>
+    public class BidInfo
     {
         public string Id { get; set; }
         public string FirstName { get; set; }

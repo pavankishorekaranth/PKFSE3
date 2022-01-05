@@ -10,10 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Buyer.Application.ViewModel;
+using Buyer.Application.Exceptions;
 
 namespace Buyer.Application.Handlers
 {
-    public class CreateBidCommandHandler : IRequestHandler<CreateBidCommand, string>
+    public class CreateBidCommandHandler : IRequestHandler<CreateBidCommand, BidInfo>
     {
         private readonly IMapper _mapper;
         private readonly IBidRepository _bidRepository;
@@ -26,14 +28,20 @@ namespace Buyer.Application.Handlers
             _logger = logger;
         }
 
-        public async Task<string> Handle(CreateBidCommand request, CancellationToken cancellationToken)
+        public async Task<BidInfo> Handle(CreateBidCommand request, CancellationToken cancellationToken)
         {
+            bool isBidAlreadyPlaced = await _bidRepository.IsBidForProductAlreadyExists(request.ProductId, request.Email);
+            if (isBidAlreadyPlaced)
+            {
+                throw new BidAlreadyPlacedByUserException("Cannot bid more than once for same Product");
+            }
+
             var bidEntity = _mapper.Map<Bid>(request);
             var newBid= await _bidRepository.PlaceBid(bidEntity);
 
             _logger.LogInformation($"Bid {newBid.BidId} is successfully created.");
 
-            return newBid.BidId;
+            return _mapper.Map<BidInfo>(newBid);
         }
     }
 }

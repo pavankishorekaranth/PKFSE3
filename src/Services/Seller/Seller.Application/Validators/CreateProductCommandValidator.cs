@@ -31,6 +31,8 @@ namespace Seller.Application.Validators
             RuleFor(p => p.Phone)
                 .NotEmpty().WithMessage("Phone Number is required")
                 .NotNull().WithMessage("Phone Number cannot be null")
+                .MinimumLength(10).WithMessage("Minimum of 10 characters are required")
+                .MaximumLength(10).WithMessage("Maximum of 10 characters are required")
                 .MatchPhoneNumber();
 
             RuleFor(p => p.Email)
