@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Seller.Application.ViewModels
+namespace Buyer.Application.ViewModel
 {
     public class ProductDetails
     {

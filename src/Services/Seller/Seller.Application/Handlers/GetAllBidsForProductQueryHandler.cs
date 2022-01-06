@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace Seller.Application.Handlers
 {
@@ -41,17 +42,11 @@ namespace Seller.Application.Handlers
                 throw new ProductNotExist($"Product with {request.ProductId} doesnot exists");
             }
 
-            List<Bid> bids = await _context.Products.AsQueryable()
-                                    .Where(j => j.Id == request.ProductId)
-                                    .Join(
-                                       _context.Bids, //foreign collection
-                                        j => j.Id, //local ID
-                                        b => b.ProductId, //foreign ID
-                                        (j, b) => b) //result selector expression
-                                    .ToListAsync();
+            var bidsList = await _context.Bids.AsQueryable()
+                                    .Where(j => j.ProductId == request.ProductId).ToListAsync();
 
             var productDetails = _mapper.Map<ProductBidDetails>(product);
-            productDetails.Bids = _mapper.Map<List<BidDetails>>(bids);
+            productDetails.Bids = _mapper.Map<List<BidDetails>>(bidsList);
            
 
             return productDetails;

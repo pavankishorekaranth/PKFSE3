@@ -14,6 +14,7 @@ namespace Seller.Application.Mapper
             CreateMap<Bid, BidDetails>().ReverseMap();
             CreateMap<Product, ProductBidDetails>().ReverseMap();
             CreateMap<Bid, CreateBidCommand>().ReverseMap();
+            CreateMap<Bid, UpdateBidCommand>().ReverseMap();
         }
     }
 }

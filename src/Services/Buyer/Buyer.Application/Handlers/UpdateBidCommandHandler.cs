@@ -29,7 +29,7 @@ namespace Buyer.Application.Handlers
 
         public async Task<Unit> Handle(UpdateBidCommand request, CancellationToken cancellationToken)
         {
-            var bidToUpdate = await _bidRepository.GetBidByIdAndEmail(request.Id,request.Email);
+            var bidToUpdate = await _bidRepository.GetBidByProductIdAndEmail(request.ProductId,request.Email);
             if (bidToUpdate == null)
             {
                 _logger.LogError($"Bid doesnot exist");
@@ -40,7 +40,7 @@ namespace Buyer.Application.Handlers
 
             await _bidRepository.UpdateBid(bidToUpdate);
 
-            _logger.LogInformation($"Bid Amount {bidToUpdate.BidId} is successfully updated.");
+            _logger.LogInformation($"Bid Amount {bidToUpdate.Id} is successfully updated.");
 
             return Unit.Value;
         }

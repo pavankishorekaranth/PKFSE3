@@ -18,15 +18,20 @@ namespace Buyer.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<Bid> GetBidById(string id)
+        {
+            return await _context.Bids.Find(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<Bid> PlaceBid(Bid bid)
         {
             await _context.Bids.InsertOneAsync(bid);
             return bid;
         }
 
-        public async Task<Bid> GetBidByIdAndEmail(string productId, string email)
+        public async Task<Bid> GetBidByProductIdAndEmail(string productId, string email)
         {
-            return await _context.Bids.Find(p => p.BidId == productId && p.Email == email).FirstOrDefaultAsync();
+            return await _context.Bids.Find(p => p.ProductId == productId && p.Email == email).FirstOrDefaultAsync();
         }
 
         public async Task<bool> UpdateBid(Bid bidRecord)
@@ -35,7 +40,6 @@ namespace Buyer.Infrastructure.Repositories
             //bidRecord.BidAmount = newAmount;
 
             var updatedResult = await _context.Bids.ReplaceOneAsync(filter: p => p.ProductId == bidRecord.ProductId && p.Email == bidRecord.Email, replacement: bidRecord);
-
             return updatedResult.IsAcknowledged && updatedResult.ModifiedCount > 0;
         }
 

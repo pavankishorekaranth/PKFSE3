@@ -13,6 +13,7 @@ namespace Seller.API.Mapper
         public SellerProfile()
         {
             CreateMap<CreateBidCommand, CreateBidEvent>().ReverseMap();
+            CreateMap<UpdateBidCommand, UpdateBidEvent>().ReverseMap();
         }
     }
 }

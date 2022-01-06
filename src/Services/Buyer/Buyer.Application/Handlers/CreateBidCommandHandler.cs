@@ -33,13 +33,13 @@ namespace Buyer.Application.Handlers
             bool isBidAlreadyPlaced = await _bidRepository.IsBidForProductAlreadyExists(request.ProductId, request.Email);
             if (isBidAlreadyPlaced)
             {
-                throw new BidAlreadyPlacedByUserException("Cannot bid more than once for same Product");
+                throw new BidAlreadyPlacedByUserException("You cannot bid more than once for same Product");
             }
 
             var bidEntity = _mapper.Map<Bid>(request);
             var newBid= await _bidRepository.PlaceBid(bidEntity);
 
-            _logger.LogInformation($"Bid {newBid.BidId} is successfully created.");
+            _logger.LogInformation($"Bid {newBid.Id} is successfully created.");
 
             return _mapper.Map<BidInfo>(newBid);
         }

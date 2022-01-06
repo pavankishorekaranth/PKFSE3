@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 using Seller.API.EventBusConsumer;
 using Seller.Infrastructure;
 using Seller.Application;
+using System.Reflection;
 
 namespace Seller.API
 {
@@ -32,10 +33,13 @@ namespace Seller.API
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             //RabbitMq configurations
             services.AddMassTransit(config =>
             {
                 config.AddConsumer<CreateBidConsumer>();
+                config.AddConsumer<UpdateBidConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
@@ -43,6 +47,9 @@ namespace Seller.API
 
                     cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c => {
                         c.ConfigureConsumer<CreateBidConsumer>(ctx);
+                    });
+                    cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c => {
+                        c.ConfigureConsumer<UpdateBidConsumer>(ctx);
                     });
                 });
             });

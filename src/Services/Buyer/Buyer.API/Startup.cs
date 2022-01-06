@@ -39,7 +39,7 @@ namespace Buyer.API
             services.AddMassTransit(config=> {
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host(Configuration["EventBusSettings.HostAddress"]);
+                    cfg.Host("amqp://guest:guest@localhost:5672");
                 });
             });
             services.AddMassTransitHostedService();
@@ -49,6 +49,8 @@ namespace Buyer.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Buyer.API", Version = "v1" });
             });
+
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

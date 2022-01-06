@@ -10,5 +10,6 @@ namespace Seller.Application.Contracts.Persistence
     public interface IBidRepository
     {
         Task<Bid> CreateBid(Bid bid);
+        Task<bool> UpdateBid(Bid bid);
     }
 }

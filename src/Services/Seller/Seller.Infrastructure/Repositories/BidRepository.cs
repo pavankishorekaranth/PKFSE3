@@ -1,6 +1,8 @@
 ﻿using Seller.Domain.Entities;
 using Seller.Application.Contracts.Persistence;
+using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 
 namespace Seller.Infrastructure.Repositaries
 {
@@ -17,6 +19,19 @@ namespace Seller.Infrastructure.Repositaries
         {
             await _context.Bids.InsertOneAsync(bid);
             return bid;
+        }
+
+        public async Task<bool> UpdateBid(Bid bidRecord)
+        {
+            //var bidRecord = await _context.Bids.Find(p => p.ProductId == productId && p.Email == buyerEmail).FirstOrDefaultAsync();
+            //bidRecord.BidAmount = newAmount;
+
+            var builders = Builders<Bid>.Filter.Eq(x => x.Id,bidRecord.Id);
+            var updatedResult = await _context.Bids.ReplaceOneAsync(builders, bidRecord);
+
+            //var updatedResult = await _context.Bids.ReplaceOneAsync(filter: x => x.ProductId == bidRecord.ProductId && x.Email == bidRecord.Email, replacement: bidRecord);
+
+            return updatedResult.IsAcknowledged && updatedResult.ModifiedCount > 0;
         }
     }
 }
