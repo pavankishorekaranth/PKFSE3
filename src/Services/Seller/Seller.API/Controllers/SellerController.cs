@@ -108,7 +108,7 @@ namespace Seller.API.Controllers
                 var command = new DeleteProductCommand() { ProductId = productId };
                 await _mediator.Send(command);
 
-                return Ok();
+                return Ok("Product is deleted successfully");
             }
             catch(ProductNotExist ex)
             {

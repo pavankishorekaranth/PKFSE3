@@ -14,6 +14,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+
+
 namespace Buyer.API.Controllers
 {
     [ApiController]
@@ -70,13 +72,18 @@ namespace Buyer.API.Controllers
             catch(BidAlreadyPlacedByUserException ex)
             {
                 _logger.LogError(ex.ToString());
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
             catch (ValidationException ex)
             {
                 _logger.LogError(ex.Message);
                 var items = ex.Errors.SelectMany(d => d.Value).ToList();
                 return BadRequest(string.Join(";", items));
+            }
+            catch (NotFoundException ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -91,23 +98,47 @@ namespace Buyer.API.Controllers
         {
             if (id != command.Id)
             {
-                return BadRequest();
+                return BadRequest("Bid Id's dont match");
             }
 
             try
             {
-                _logger.LogInformation("Updating Bid");
-                var result = await _mediator.Send(command);
-                _logger.LogInformation($"Bid is updated");
+                _httpClient.BaseAddress = new Uri("https://localhost:44396/gateway/");
+                _httpClient.Timeout = new TimeSpan(0, 2, 0);
 
-                //Get updated Bid Info
-                var bidResult = await _mediator.Send(new GetBidQuery(id));
+                var response = await _httpClient.GetAsync("GetAllProducts");
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                List<ProductDetails> products = JsonConvert.DeserializeObject<List<ProductDetails>>(apiResponse);
 
-                //Publish here to rabbitmq/ Azure Service Bus
-                await _publishEndpoint.Publish<UpdateBidEvent>(bidResult);
+                if (products.Any(x => x.Id.Contains(command.ProductId)))
+                {
+                    var product = products.Where(x => x.Id.Contains(command.ProductId)).FirstOrDefault();
+                    if (DateTime.UtcNow > product.BidEndDate)
+                    {
+                        throw new BidEndDateExpiredException("You cannot place Bid after Bid End Date");
+                    }
 
-                
-                return Ok(result);
+                    _logger.LogInformation("Updating Bid");
+                    var result = await _mediator.Send(command);
+                    _logger.LogInformation($"Bid is updated");
+
+                    //Get updated Bid Info
+                    var bidResult = await _mediator.Send(new GetBidQuery(id));
+
+                    //Publish here to rabbitmq/ Azure Service Bus
+                    await _publishEndpoint.Publish<UpdateBidEvent>(bidResult);
+
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new NotFoundException("Product is not found");
+                }
+            }
+            catch(NotFoundException ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
