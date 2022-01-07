@@ -36,11 +36,7 @@ namespace DeleteProductAzFunction
 
                 var response = req.CreateResponse(HttpStatusCode.OK);
                 response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-                if (apiResponse.Contains("Product is deleted successfully"))
-                {
-                    //Send message to Service Bus
-                    response.WriteString("Product is deleted");
-                }
+                response.WriteString(apiResponse);
 
                 return response;
             }
