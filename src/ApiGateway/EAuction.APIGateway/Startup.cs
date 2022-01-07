@@ -1,15 +1,12 @@
-using Buyer.Application;
-using Buyer.Infrastructure;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-namespace Buyer.API
+namespace EAuction.APIGateway
 {
     public class Startup
     {
@@ -23,49 +20,40 @@ namespace Buyer.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructureService();
-            services.AddApplicationService();
 
-            services.AddControllers().AddNewtonsoftJson(opt => {
-                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
+            services.AddControllers();
+            services.AddOcelot();
 
-            services.AddMassTransit(config=> {
-                config.UsingRabbitMq((ctx, cfg) =>
-                {
-                    cfg.Host("amqp://guest:guest@localhost:5672");
-                });
-            });
-            services.AddMassTransitHostedService();
-
-
-            services.AddSwaggerGen(c =>
+            services.AddCors(opt =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Buyer.API", Version = "v1" });
+                opt.AddPolicy("CorsPolicy", builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
             });
-
-            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Buyer.API v1"));
             }
 
             app.UseHttpsRedirection();
+
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            await app.UseOcelot();
         }
     }
 }

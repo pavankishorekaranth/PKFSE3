@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using Seller.Domain.Entities;
 using Seller.Application.Contracts.Persistence;
+using Seller.Domain.Entities;
 
 namespace Seller.Infrastructure.Persistence
 {

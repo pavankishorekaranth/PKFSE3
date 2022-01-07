@@ -33,15 +33,15 @@ namespace Buyer.API.Controllers
             _httpClient = httpClient;
         }
 
-        [HttpPost("place-bid")]
+        [HttpPost("PlaceBid")]
         public async Task<ActionResult> PlaceBid([FromBody] CreateBidCommand bid)
         {
             try
             {
-                _httpClient.BaseAddress = new Uri("http://localhost:5000/");
+                _httpClient.BaseAddress = new Uri("https://localhost:44396/gateway/");
                 _httpClient.Timeout = new TimeSpan(0, 2, 0);
 
-                var response = await _httpClient.GetAsync("api/v1/Seller/GetAllProducts");
+                var response = await _httpClient.GetAsync("GetAllProducts");
                 var apiResponse = await response.Content.ReadAsStringAsync();
                 List<ProductDetails> products = JsonConvert.DeserializeObject<List<ProductDetails>>(apiResponse);
 
@@ -86,7 +86,7 @@ namespace Buyer.API.Controllers
         }
 
 
-        [HttpPut("updateBidAmount/{id}")]
+        [HttpPut("UpdateBidAmount/{id}")]
         public async Task<ActionResult<Unit>> UpdateBidAmount(string id, UpdateBidCommand command)
         {
             if (id != command.Id)

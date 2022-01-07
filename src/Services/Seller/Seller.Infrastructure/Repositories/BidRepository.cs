@@ -1,8 +1,7 @@
-﻿using Seller.Domain.Entities;
+﻿using MongoDB.Driver;
 using Seller.Application.Contracts.Persistence;
-using System.Linq;
+using Seller.Domain.Entities;
 using System.Threading.Tasks;
-using MongoDB.Driver;
 
 namespace Seller.Infrastructure.Repositaries
 {

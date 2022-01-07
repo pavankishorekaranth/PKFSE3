@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Seller.API
+namespace EAuction.APIGateway
 {
     public class Program
     {
@@ -15,10 +16,9 @@ namespace Seller.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureLogging((hostContext, logging)=>
-                {
-                    hostContext.Configuration.GetSection("Logging");
+                }).ConfigureAppConfiguration((ctx,cfg)=> {
+                    cfg.SetBasePath(ctx.HostingEnvironment.ContentRootPath)
+                     .AddJsonFile("ocelot.json", false, true);
                 });
     }
 }

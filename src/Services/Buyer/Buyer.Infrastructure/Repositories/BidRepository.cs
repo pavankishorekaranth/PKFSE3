@@ -1,10 +1,6 @@
-﻿using Buyer.Domain.Entities;
-using Buyer.Application.Contracts.Persistence;
+﻿using Buyer.Application.Contracts.Persistence;
+using Buyer.Domain.Entities;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Buyer.Infrastructure.Repositories

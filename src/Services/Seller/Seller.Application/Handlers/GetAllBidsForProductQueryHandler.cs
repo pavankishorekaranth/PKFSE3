@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using Seller.Domain.Entities;
 using Seller.Application.Contracts.Persistence;
 using Seller.Application.Exceptions;
 using Seller.Application.Queries;
@@ -12,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System;
 
 namespace Seller.Application.Handlers
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Seller.Domain.Entities;
 using Seller.Application.Commands;
 using Seller.Application.ViewModels;
+using Seller.Domain.Entities;
 
 namespace Seller.Application.Mapper
 {

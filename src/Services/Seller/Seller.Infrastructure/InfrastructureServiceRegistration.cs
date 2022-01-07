@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Seller.Application.Contracts.Persistence;
 using Seller.Infrastructure.Persistence;
 using Seller.Infrastructure.Repositaries;
-using Seller.Application.Contracts.Persistence;
-using System;
 
 namespace Seller.Infrastructure
 {

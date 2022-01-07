@@ -66,7 +66,7 @@ namespace Seller.API.Controllers
             }
         }
 
-        [HttpPost("add-Product")]
+        [HttpPost("AddProduct")]
         public async Task<ActionResult> AddProduct([FromBody] CreateProductCommand product)
         {
             try
@@ -99,7 +99,7 @@ namespace Seller.API.Controllers
             }
         }
 
-        [HttpDelete("delete/{productId}")]
+        [HttpDelete("DeleteProduct/{productId}")]
         public async Task<ActionResult> DeleteProduct(string productId)
         {
             try

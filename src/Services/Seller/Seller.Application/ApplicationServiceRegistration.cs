@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Reflection;
+﻿using FluentValidation;
 using MediatR;
-using FluentValidation;
-//using Seller.Application.DataAccess;
-//using Seller.Application.Repositaries;
+using Microsoft.Extensions.DependencyInjection;
 using Seller.Application.Behaviour;
+using System.Reflection;
 
 namespace Seller.Application
 {
@@ -16,10 +13,6 @@ namespace Seller.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddScoped<ISellerContext,SellerContext>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<IBidRepository, BidRepository>();
-
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             return services;

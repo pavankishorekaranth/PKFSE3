@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
-using Seller.Domain.Entities;
 using Seller.Application.Contracts.Persistence;
+using Seller.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

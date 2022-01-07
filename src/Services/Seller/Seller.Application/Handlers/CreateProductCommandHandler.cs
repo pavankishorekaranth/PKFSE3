@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Seller.Domain.Entities;
 using Seller.Application.Commands;
 using Seller.Application.Contracts.Persistence;
 using Seller.Application.Exceptions;
+using Seller.Domain.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

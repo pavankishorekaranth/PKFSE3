@@ -8,8 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Seller.API.EventBusConsumer;
-using Seller.Infrastructure;
 using Seller.Application;
+using Seller.Infrastructure;
 using System.Reflection;
 
 namespace Seller.API
@@ -28,6 +28,15 @@ namespace Seller.API
         {
             services.AddApplicationServices();
             services.AddInfrastructureService(Configuration);
+
+            //services.AddCors(opt =>
+            //{
+            //    opt.AddPolicy("CorsPolicy", builder =>
+            //    builder.AllowAnyOrigin()
+            //    .AllowAnyHeader()
+            //    .AllowAnyMethod());
+            //});
+
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
@@ -45,10 +54,12 @@ namespace Seller.API
                 {
                     cfg.Host(Configuration["EventBusSettings:HostAddress"]);
 
-                    cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c => {
+                    cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c =>
+                    {
                         c.ConfigureConsumer<CreateBidConsumer>(ctx);
                     });
-                    cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c => {
+                    cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c =>
+                    {
                         c.ConfigureConsumer<UpdateBidConsumer>(ctx);
                     });
                 });
@@ -71,9 +82,11 @@ namespace Seller.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Seller.API v1"));
             }
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            //app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

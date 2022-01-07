@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
-using Buyer.Domain.Entities;
 using Buyer.Application.Commands;
 using Buyer.Application.Contracts.Persistence;
 using Buyer.Application.Exceptions;
+using Buyer.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

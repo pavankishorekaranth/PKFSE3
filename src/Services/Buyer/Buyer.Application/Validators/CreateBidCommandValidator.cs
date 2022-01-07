@@ -1,7 +1,5 @@
 ﻿using Buyer.Application.Commands;
 using FluentValidation;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Buyer.Application.Validators
 {
