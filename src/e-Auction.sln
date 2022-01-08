@@ -39,7 +39,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductAzFunction", "AzureFunction\DeleteProductAzFunction\DeleteProductAzFunction.csproj", "{08A5C213-9B8C-4B7A-B686-027AB5E4E928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteProductServiceQueue", "AzureFunction\DeleteProductServiceQueue\DeleteProductServiceQueue.csproj", "{83B2328B-5952-467F-8EBE-CD457D5865D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueue", "AzureFunction\DeleteProductServiceQueue\DeleteProductServiceQueue.csproj", "{83B2328B-5952-467F-8EBE-CD457D5865D8}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "eAuction", "..\..\Angular\eAuction\", "{F8F12903-AEA2-4BF1-BB9A-A04222F099C5}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49498"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\Angular\eAuction\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49498\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49498"
+		Release.AspNetCompiler.PhysicalPath = "..\..\Angular\eAuction\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49498\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49498"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +115,10 @@ Global
 		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F12903-AEA2-4BF1-BB9A-A04222F099C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F12903-AEA2-4BF1-BB9A-A04222F099C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F12903-AEA2-4BF1-BB9A-A04222F099C5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F12903-AEA2-4BF1-BB9A-A04222F099C5}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +138,7 @@ Global
 		{EFD885D7-295E-4170-940F-CAA23C3517F8} = {35121298-8AAA-4301-9EFB-5C8CB095C302}
 		{08A5C213-9B8C-4B7A-B686-027AB5E4E928} = {FA2A609E-DB6A-413A-9155-AF1595D5A98A}
 		{83B2328B-5952-467F-8EBE-CD457D5865D8} = {FA2A609E-DB6A-413A-9155-AF1595D5A98A}
+		{F8F12903-AEA2-4BF1-BB9A-A04222F099C5} = {06667F83-E1C5-4FA0-9FBB-363062533B14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70BAA42C-F940-4852-B113-E2D3A5BFD472}
