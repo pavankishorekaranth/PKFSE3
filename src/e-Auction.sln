@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductAzFunction", "AzureFunction\DeleteProductAzFunction\DeleteProductAzFunction.csproj", "{08A5C213-9B8C-4B7A-B686-027AB5E4E928}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueue", "AzureFunction\DeleteProductServiceQueue\DeleteProductServiceQueue.csproj", "{83B2328B-5952-467F-8EBE-CD457D5865D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueueTrigger", "AzureFunction\TestQueueTrigger\DeleteProductServiceQueueTrigger.csproj", "{3F9018EA-0E47-412A-94A6-F491DC414C65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,10 +91,10 @@ Global
 		{08A5C213-9B8C-4B7A-B686-027AB5E4E928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A5C213-9B8C-4B7A-B686-027AB5E4E928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08A5C213-9B8C-4B7A-B686-027AB5E4E928}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83B2328B-5952-467F-8EBE-CD457D5865D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F9018EA-0E47-412A-94A6-F491DC414C65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F9018EA-0E47-412A-94A6-F491DC414C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F9018EA-0E47-412A-94A6-F491DC414C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F9018EA-0E47-412A-94A6-F491DC414C65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,7 +113,7 @@ Global
 		{D69A4048-CAFF-480E-8FCB-C99272FAD0E4} = {90D17985-8D92-4055-B573-75E6C73B18FD}
 		{EFD885D7-295E-4170-940F-CAA23C3517F8} = {35121298-8AAA-4301-9EFB-5C8CB095C302}
 		{08A5C213-9B8C-4B7A-B686-027AB5E4E928} = {FA2A609E-DB6A-413A-9155-AF1595D5A98A}
-		{83B2328B-5952-467F-8EBE-CD457D5865D8} = {FA2A609E-DB6A-413A-9155-AF1595D5A98A}
+		{3F9018EA-0E47-412A-94A6-F491DC414C65} = {FA2A609E-DB6A-413A-9155-AF1595D5A98A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70BAA42C-F940-4852-B113-E2D3A5BFD472}

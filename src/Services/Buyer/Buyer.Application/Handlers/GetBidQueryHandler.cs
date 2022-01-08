@@ -24,11 +24,14 @@ namespace Buyer.Application.Handlers
 
         public async Task<BidInfo> Handle(GetBidQuery request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Handling Get Bid Request");
             var bid = await _bidRepository.GetBidById(request.Id);
             if (bid == null)
             {
                 return null;
             }
+
+            _logger.LogInformation("Completed handling Get Bid Request");
             return _mapper.Map<BidInfo>(bid);
         }
     }

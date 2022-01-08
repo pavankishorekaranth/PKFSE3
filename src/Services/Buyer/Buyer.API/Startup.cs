@@ -30,14 +30,24 @@ namespace Buyer.API
                 opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
 
+            bool.TryParse(Configuration["BaseServiceSettings:UserabbitMq"], out var useRabbitMq);
             services.AddMassTransit(config=> {
-                config.UsingRabbitMq((ctx, cfg) =>
+                if (useRabbitMq)
                 {
-                    cfg.Host("amqp://guest:guest@localhost:5672");
-                });
+                    config.UsingRabbitMq((ctx, cfg) =>
+                    {
+                        cfg.Host("amqp://guest:guest@localhost:5672");
+                    });
+                }
+                else
+                {
+                    config.UsingAzureServiceBus((ctx, cfg) =>
+                    {
+                        cfg.Host(Configuration["AzureServiceBusQueueBusSettings:ConnectionString"]);
+                    });
+                }
             });
             services.AddMassTransitHostedService();
-
 
             services.AddSwaggerGen(c =>
             {

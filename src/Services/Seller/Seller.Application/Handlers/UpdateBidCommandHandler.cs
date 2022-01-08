@@ -25,7 +25,7 @@ namespace Seller.Application.Handlers
         public async Task<Unit> Handle(UpdateBidCommand request, CancellationToken cancellationToken)
         {
             var bidEntity = _mapper.Map<Bid>(request);
-            var updateBid = await _bidRepository.UpdateBid(bidEntity);
+            await _bidRepository.UpdateBid(bidEntity);
 
             _logger.LogInformation($"Bid Information is successfully updated.");
 

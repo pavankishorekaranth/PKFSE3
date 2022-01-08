@@ -37,7 +37,7 @@ namespace Seller.Application.Handlers
                 throw new BidEndDateException("Product cannot be deleted after Bid end date");
             }
 
-            var count = await _context.Bids.Find(x=> x.ProductId== productToDelete.Id).CountDocumentsAsync();
+            var count = await _context.Bids.Find(x=> x.ProductId== productToDelete.Id).CountDocumentsAsync(cancellationToken);
 
             if (count > 0)
             {

@@ -28,14 +28,16 @@ namespace Buyer.API.Controllers
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
+        private readonly ISendEndpointProvider _sendEndpointProvider;
 
-        public BuyerController(ILogger<BuyerController> logger, IMediator mediator, IPublishEndpoint publishEndpoint, HttpClient httpClient, IConfiguration configuration)
+        public BuyerController(ILogger<BuyerController> logger, IMediator mediator, IPublishEndpoint publishEndpoint, HttpClient httpClient, IConfiguration configuration, ISendEndpointProvider sendEndpointProvider)
         {
             _logger = logger;
             _mediator = mediator;
             _publishEndpoint = publishEndpoint;
             _httpClient = httpClient;
             _configuration = configuration;
+            _sendEndpointProvider = sendEndpointProvider;
         }
 
         [HttpPost("PlaceBid")]
@@ -60,9 +62,16 @@ namespace Buyer.API.Controllers
 
                     _logger.LogInformation("Creating Bid");
                     var result = await _mediator.Send(bid);
-
-                    //Publish here to rabbitmq/ Azure Service Bus
-                    await _publishEndpoint.Publish<CreateBidEvent>(result);
+                    bool useRabbitMq = _configuration.GetValue<bool>("BaseServiceSettings:UserabbitMq");
+                    if (useRabbitMq)
+                    {
+                        await _publishEndpoint.Publish<CreateBidEvent>(result);
+                    }
+                    else
+                    {
+                        var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri(_configuration.GetValue<string>("AzureServiceBusQueueBusSettings:CreateBidQueueSendEndPoint")));
+                        await sendEndpoint.Send<CreateBidEvent>(result);
+                    }
 
                     _logger.LogInformation($"Bid is created with Id {result.Id}");
                     return Ok("Bid created successfully");
@@ -127,9 +136,16 @@ namespace Buyer.API.Controllers
 
                     //Get updated Bid Info
                     var bidResult = await _mediator.Send(new GetBidQuery(id));
-
-                    //Publish here to rabbitmq/ Azure Service Bus
-                    await _publishEndpoint.Publish<UpdateBidEvent>(bidResult);
+                    bool useRabbitMq = _configuration.GetValue<bool>("BaseServiceSettings:UserabbitMq");
+                    if (useRabbitMq)
+                    {
+                        await _publishEndpoint.Publish<UpdateBidEvent>(bidResult);
+                    }
+                    else
+                    {
+                        var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri(_configuration.GetValue<string>("AzureServiceBusQueueBusSettings:UpdateBidQueueSendEndPoint")));
+                        await sendEndpoint.Send<UpdateBidEvent>(bidResult);
+                    }
 
                     return Ok("Bid amount updated successfully");
                 }

@@ -26,7 +26,7 @@ namespace DeleteProductAzFunction
             string apiResponse = "";
             try
             {
-                HttpClient httpClient = new HttpClient();
+                HttpClient httpClient = new();
                 httpClient.BaseAddress = new Uri("https://localhost:44396/gateway/");
                 httpClient.Timeout = new TimeSpan(0, 2, 0);
 
@@ -38,7 +38,7 @@ namespace DeleteProductAzFunction
                 if (apiResponse == "Product is deleted successfully")
                 {
                     string queueName = "az-deleteproduct-queue";
-                    string serviceBusConnectionString = "";
+                    string serviceBusConnectionString = "Endpoint=sb://pktestsb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=FXBNZ+rAkXFbt9r/Evg456NrWVXEXvkrLI7ilwn/OKY=";
                     string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                     var client = new QueueClient(serviceBusConnectionString, queueName);
                     

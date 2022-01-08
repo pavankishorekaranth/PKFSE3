@@ -27,15 +27,7 @@ namespace Seller.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices();
-            services.AddInfrastructureService(Configuration);
-
-            //services.AddCors(opt =>
-            //{
-            //    opt.AddPolicy("CorsPolicy", builder =>
-            //    builder.AllowAnyOrigin()
-            //    .AllowAnyHeader()
-            //    .AllowAnyMethod());
-            //});
+            services.AddInfrastructureService();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
@@ -44,25 +36,46 @@ namespace Seller.API
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            //RabbitMq configurations
+            bool.TryParse(Configuration["BaseServiceSettings:UserabbitMq"], out var useRabbitMq);
+            
+            //RabbitMq/Service Bus configurations using Masstransit
             services.AddMassTransit(config =>
             {
                 config.AddConsumer<CreateBidConsumer>();
                 config.AddConsumer<UpdateBidConsumer>();
 
-                config.UsingRabbitMq((ctx, cfg) =>
+                if (useRabbitMq)
                 {
-                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                    config.UsingRabbitMq((ctx, cfg) =>
+                    {
+                        cfg.Host(Configuration["RabbitMQSettings:HostAddress"]);
 
-                    cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c =>
-                    {
-                        c.ConfigureConsumer<CreateBidConsumer>(ctx);
+                        cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c =>
+                        {
+                            c.ConfigureConsumer<CreateBidConsumer>(ctx);
+                        });
+                        cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c =>
+                        {
+                            c.ConfigureConsumer<UpdateBidConsumer>(ctx);
+                        });
                     });
-                    cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c =>
+                }
+                else
+                {
+                    config.UsingAzureServiceBus((ctx, cfg) =>
                     {
-                        c.ConfigureConsumer<UpdateBidConsumer>(ctx);
+                        cfg.Host(Configuration["AzureServiceBusQueueBusSettings:ConnectionString"]);
+
+                        cfg.ReceiveEndpoint(EventBusConstants.CreateBidQueue, c =>
+                        {
+                            c.ConfigureConsumer<CreateBidConsumer>(ctx);
+                        });
+                        cfg.ReceiveEndpoint(EventBusConstants.UpdateBidQueue, c =>
+                        {
+                            c.ConfigureConsumer<UpdateBidConsumer>(ctx);
+                        });
                     });
-                });
+                }
             });
             services.AddMassTransitHostedService();
 
@@ -86,7 +99,6 @@ namespace Seller.API
 
             app.UseRouting();
 
-            //app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

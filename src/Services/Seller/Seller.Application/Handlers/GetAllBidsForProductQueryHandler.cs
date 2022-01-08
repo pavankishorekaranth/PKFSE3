@@ -41,7 +41,7 @@ namespace Seller.Application.Handlers
             }
 
             var bidsList = await _context.Bids.AsQueryable()
-                                    .Where(j => j.ProductId == request.ProductId).ToListAsync();
+                                    .Where(j => j.ProductId == request.ProductId).ToListAsync(cancellationToken: cancellationToken);
 
             var productDetails = _mapper.Map<ProductBidDetails>(product);
             productDetails.Bids = _mapper.Map<List<BidDetails>>(bidsList);
