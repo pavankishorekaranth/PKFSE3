@@ -6,6 +6,7 @@ using EventBus.Message.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -26,13 +27,15 @@ namespace Buyer.API.Controllers
         private readonly IMediator _mediator;
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        public BuyerController(ILogger<BuyerController> logger, IMediator mediator, IPublishEndpoint publishEndpoint, HttpClient httpClient)
+        public BuyerController(ILogger<BuyerController> logger, IMediator mediator, IPublishEndpoint publishEndpoint, HttpClient httpClient, IConfiguration configuration)
         {
             _logger = logger;
             _mediator = mediator;
             _publishEndpoint = publishEndpoint;
             _httpClient = httpClient;
+            _configuration = configuration;
         }
 
         [HttpPost("PlaceBid")]
@@ -40,7 +43,7 @@ namespace Buyer.API.Controllers
         {
             try
             {
-                _httpClient.BaseAddress = new Uri("https://localhost:44396/gateway/");
+                _httpClient.BaseAddress = new Uri(_configuration.GetValue<string>("GatewaySettings:BaseUrl"));
                 _httpClient.Timeout = new TimeSpan(0, 2, 0);
 
                 var response = await _httpClient.GetAsync("GetAllProducts");
@@ -62,7 +65,7 @@ namespace Buyer.API.Controllers
                     await _publishEndpoint.Publish<CreateBidEvent>(result);
 
                     _logger.LogInformation($"Bid is created with Id {result.Id}");
-                    return Ok();
+                    return Ok("Bid created successfully");
                 }
                 else
                 {
@@ -103,7 +106,7 @@ namespace Buyer.API.Controllers
 
             try
             {
-                _httpClient.BaseAddress = new Uri("https://localhost:44396/gateway/");
+                _httpClient.BaseAddress = new Uri(_configuration.GetValue<string>("GatewaySettings:BaseUrl"));
                 _httpClient.Timeout = new TimeSpan(0, 2, 0);
 
                 var response = await _httpClient.GetAsync("GetAllProducts");
@@ -128,7 +131,7 @@ namespace Buyer.API.Controllers
                     //Publish here to rabbitmq/ Azure Service Bus
                     await _publishEndpoint.Publish<UpdateBidEvent>(bidResult);
 
-                    return Ok(result);
+                    return Ok("Bid amount updated successfully");
                 }
                 else
                 {

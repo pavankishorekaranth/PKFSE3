@@ -74,7 +74,7 @@ namespace Seller.API.Controllers
                 _logger.LogInformation("Creating Product");
                 var result = await _mediator.Send(product);
                 _logger.LogInformation($"Product is created with Id {result}");
-                return Ok(result);
+                return Ok("Added Product successfully");
             }
             catch (BidEndDateException ex)
             {

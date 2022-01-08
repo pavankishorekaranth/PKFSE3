@@ -1,0 +1,105 @@
+<div class="container mt-4 text-center">
+  <h1 class="fw-bolder">{{'Welcome to eAuction for Products'}}</h1>
+  <p class="lead">{{'Here you can see the latest bid details for the product'}}</p>
+</div>
+
+
+<div class="row mt-5">
+    <div class="col-md-10 offset-md-1">
+        <div class="mb-3 row">
+            <label for="product" class="col-sm-2 col-form-label fw-bolder">{{'Product'}}</label>
+            <div class="col-md-3">
+                <select class="form-select form-select-md mb-3" (change)="selectedProduct($event)" id="product" aria-label=".form-select-lg example">
+                  <option value="-1">{{'Select'}}</option> 
+                  <option *ngFor="let opt of productList" [value]="opt.Id" >{{opt.ProductName}}</option>
+                  </select>
+                  <p class="text-danger" *ngIf="selectProductFlag">{{'Please select product'}}</p>
+            </div>
+          </div>
+        
+    </div>
+</div>
+
+<div class="row" *ngIf="displayDetails">
+
+  <div class="form-row">
+    <div class="offset-md-1">
+      <label class="fw-bolder" for="productName">{{'Seller Name'}}</label> 
+      <span class="ps-3"> : {{productDetails.FirstName + ' '+ productDetails.LastName}}</span>
+    </div>
+  </div>
+
+  <div class="form-row d-flex mt-3">
+    <div class="offset-md-1 col-md-5 mb-3">
+      <label class="fw-bolder" for="productName">{{'Product Name'}}</label>
+      <input type="text" readonly class="form-control" id="productName" placeholder="Product Name" [(ngModel)]="productDetails.ProductName">
+    </div>
+    <div class="col-md-5 ms-md-5 mb-3">
+      <label class="fw-bolder" for="shortDesc">{{'Short Description'}}</label>
+      <input type="text" readonly class="form-control" id="shortDesc" placeholder="Short Description" [(ngModel)]="productDetails.ShortDescription">
+    </div>
+  </div>
+   
+  <div class="form-row d-flex">
+    <div class="offset-md-1 col-12 col-md-10 mb-3">
+      <label for="detailedDesc" class="fw-bolder">{{'Detailed Description'}}</label>
+      <textarea class="form-control" id="detailedDesc" [(ngModel)]="productDetails.DetailedDescription" readonly>
+      </textarea>
+    </div>
+  </div>
+
+  <div class="form-row d-flex">
+    <div class="offset-md-1 col-md-3 mb-3">
+      <label for="category" class="fw-bolder">{{'Category'}}</label>
+      <input type="text" readonly class="form-control" [(ngModel)]="productDetails.Category" id="category" >
+    </div>
+    <div class="col-md-3 ms-md-5 mb-3">
+      <label for="startPrice" class="fw-bolder">{{'Starting Price'}}</label>
+      <input type="text" readonly class="form-control" [(ngModel)]="productDetails.StartingPrice" id="startPrice" >
+    </div>
+    <div class="col-md-3 ms-md-5 mb-3">
+      <label for="bidEndDate" class="fw-bolder">{{'Bid End Date'}}</label>
+      <input type="text" readonly class="form-control" [ngModel]="productDetails.BidEndDate | date: 'MMM d, y, h:mm:ss a'" id="bidEndDate" >
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="offset-md-1">
+      <label  class="fw-bolder">{{'Bid Details'}}</label>
+    </div>
+  </div>
+  
+  <div class="row mt-3">
+      <div class="col-md-10 offset-md-1 table-responsive">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">{{'Bid Amount'}}</th>
+                  <th scope="col">{{'Name'}}</th>
+                  <th scope="col">{{'Email'}}</th>
+                  <th scope="col">{{'Mobile'}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bid of productDetails.Bids; let i=index;">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{bid.BidAmount}}</td>
+                  <td>{{bid.FirstName}} {{bid.LastName}}</td>
+                  <td>{{bid.Email}}</td>
+                  <td>{{bid.Phone}}</td>
+                </tr>
+                <tr *ngIf="productDetails.Bids.length==0">
+                  {{'No Bids are available for the selected product' }}
+                </tr>
+              </tbody>
+            </table>
+      </div>
+  </div>
+
+</div>
+
+
+
+
+
