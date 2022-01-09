@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueueTrigger", "AzureFunction\DeleteProductServiceQueueTrigger\DeleteProductServiceQueueTrigger.csproj", "{3F9018EA-0E47-412A-94A6-F491DC414C65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteProductFunction", "AzureFunction\DeleteProductFunction\DeleteProductFunction.csproj", "{7AE2D73C-10AD-4579-BAFB-C1229E8E9BC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductFunction", "AzureFunction\DeleteProductFunction\DeleteProductFunction.csproj", "{7AE2D73C-10AD-4579-BAFB-C1229E8E9BC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
