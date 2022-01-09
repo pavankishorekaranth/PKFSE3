@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{06667F83-E1C5-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunction", "{FA2A609E-DB6A-413A-9155-AF1595D5A98A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueueTrigger", "AzureFunction\TestQueueTrigger\DeleteProductServiceQueueTrigger.csproj", "{3F9018EA-0E47-412A-94A6-F491DC414C65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueueTrigger", "AzureFunction\DeleteProductServiceQueueTrigger\DeleteProductServiceQueueTrigger.csproj", "{3F9018EA-0E47-412A-94A6-F491DC414C65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteProductFunction", "AzureFunction\DeleteProductFunction\DeleteProductFunction.csproj", "{7AE2D73C-10AD-4579-BAFB-C1229E8E9BC9}"
 EndProject
