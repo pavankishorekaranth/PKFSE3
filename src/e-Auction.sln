@@ -33,8 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAuction.APIGateway", "ApiGateway\EAuction.APIGateway\EAuction.APIGateway.csproj", "{EFD885D7-295E-4170-940F-CAA23C3517F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{06667F83-E1C5-4FA0-9FBB-363062533B14}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunction", "{FA2A609E-DB6A-413A-9155-AF1595D5A98A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeleteProductServiceQueueTrigger", "AzureFunction\DeleteProductServiceQueueTrigger\DeleteProductServiceQueueTrigger.csproj", "{3F9018EA-0E47-412A-94A6-F491DC414C65}"
