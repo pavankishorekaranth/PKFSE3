@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "GatewayUrl": "https://localhost:44396/gateway/",
+    "QueueName": "az-deleteproduct-queue",
+    "ServiceBusConnString": "Endpoint=sb://pknewsb.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=+FQGkrkDhIpIwU3orC/KU+6CTXHT5GyeFDYRQYsoke0=;"
+
+  }
+}
