@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DeleteProductFunction
 {
@@ -34,17 +29,6 @@ namespace DeleteProductFunction
                 {
                     apiResponse = await responseData.Content.ReadAsStringAsync();
                 }
-
-                //if (apiResponse == "Product is deleted successfully")
-                //{
-                //    string queueName = Environment.GetEnvironmentVariable("QueueName");
-                //    string serviceBusConnectionString = Environment.GetEnvironmentVariable("ServiceBusConnString");
-
-                //    string messageBody = apiResponse;
-                //    var client = new QueueClient(serviceBusConnectionString, queueName);
-                //    Message message = new Message(Encoding.UTF8.GetBytes(messageBody));
-                //    await client.SendAsync(message);
-                //}
 
                 return apiResponse;
             }
