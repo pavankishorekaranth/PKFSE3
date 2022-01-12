@@ -3,6 +3,6 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "sbConnString": "Endpoint=sb://pknewsb.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=Hat/89EYrO/ygOevnaculVBXQTrGDPXNW/eScjcXtUU=;"
+    "sbConnString": "Endpoint=sb://eauctionpksb.servicebus.windows.net/;SharedAccessKeyName=Listen;SharedAccessKey=KmzqziYDDUwpgfbTZWOgvu0H4HIhvEkyJk2mWUOzIio=;"
   }
 }

@@ -16,6 +16,7 @@ namespace DeleteProductFunction
     public static class DeleteProductFunc
     {
         [Function("DeleteProduct")]
+        [return: ServiceBus("az-deleteproduct-queue", Microsoft.Azure.WebJobs.ServiceBus.ServiceBusEntityType.Queue)]
         public async static Task<string> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route ="DeleteProduct/{productId}")] HttpRequestData req,
             FunctionContext executionContext, string productId)
         {
@@ -34,18 +35,18 @@ namespace DeleteProductFunction
                     apiResponse = await responseData.Content.ReadAsStringAsync();
                 }
 
-                if (apiResponse == "Product is deleted successfully")
-                {
-                    string queueName = Environment.GetEnvironmentVariable("QueueName");
-                    string serviceBusConnectionString = Environment.GetEnvironmentVariable("ServiceBusConnString");
+                //if (apiResponse == "Product is deleted successfully")
+                //{
+                //    string queueName = Environment.GetEnvironmentVariable("QueueName");
+                //    string serviceBusConnectionString = Environment.GetEnvironmentVariable("ServiceBusConnString");
 
-                    string messageBody = apiResponse;
-                    var client = new QueueClient(serviceBusConnectionString, queueName);
-                    Message message = new Message(Encoding.UTF8.GetBytes(messageBody));
-                    await client.SendAsync(message);
-                }
+                //    string messageBody = apiResponse;
+                //    var client = new QueueClient(serviceBusConnectionString, queueName);
+                //    Message message = new Message(Encoding.UTF8.GetBytes(messageBody));
+                //    await client.SendAsync(message);
+                //}
 
-                return "Function Executed Successfully";
+                return apiResponse;
             }
             catch (Exception ex)
             {

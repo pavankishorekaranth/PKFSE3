@@ -3,8 +3,8 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "GatewayUrl": "https://localhost:44396/gateway/",
+    "GatewayUrl": "https://eauctionapigatewayservice.azurewebsites.net/gateway/",
     "QueueName": "az-deleteproduct-queue",
-    "ServiceBusConnString": "Endpoint=sb://pknewsb.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=+FQGkrkDhIpIwU3orC/KU+6CTXHT5GyeFDYRQYsoke0=;"
+    "AzureWebJobsServiceBus": "Endpoint=sb://eauctionpksb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=63hxOpOoiPt9ospqR2YyAIVwy1KesrmDlb4Yk6ZXb20="
   }
 }
